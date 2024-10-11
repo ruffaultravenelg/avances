@@ -1,0 +1,15 @@
+-- Use `sqlite3 data.db < create.sql`
+
+CREATE TABLE IF NOT EXISTS AVANCES (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    somme REAL NOT NULL,
+    creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    creator INTEGER NOT NULL -- creator -> USERS.id
+);
+
+CREATE TABLE IF NOT EXISTS USERS (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    pass TEXT NOT NULL
+);
