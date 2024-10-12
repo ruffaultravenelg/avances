@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
 function getAvances() {
     try {
         $db = connectDb();
-        $stmt = $db->prepare("SELECT nom, sum(somme) AS somme FROM AVANCES GROUP BY nom;");
+        $stmt = $db->prepare("SELECT nom, sum(somme) AS somme FROM AVANCES GROUP BY UPPER(nom);");
         $stmt->execute();
 
         // Récupérer les résultats sous forme de tableau associatif

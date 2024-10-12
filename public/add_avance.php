@@ -25,6 +25,7 @@ if (!isset($_POST['nom']) || !isset($_POST['somme'])) {
 
 $nom = htmlspecialchars(trim($_POST['nom']));
 $somme = floatval($_POST['somme']);
+$id = htmlspecialchars(string: $_SESSION['user_id']);
 
 // Vérification des données
 if (empty($nom) || $somme <= 0) {
@@ -36,15 +37,11 @@ try {
     // Connect
     $db = connectDb();
         
-    // Sanitize values
-    $nom = htmlspecialchars($nom);
-    $somme = htmlspecialchars($somme);
-
     // Préparation et exécution de la requête d'insertion
-    $stmt = $db->prepare("INSERT INTO AVANCES (nom, somme, creator) VALUES (UPPER(:nom), :somme, :creator)");
+    $stmt = $db->prepare("INSERT INTO AVANCES (nom, somme, admin) VALUES (:nom, :somme, :admin)");
     $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
     $stmt->bindParam(':somme', $somme, PDO::PARAM_STR);
-    $stmt->bindParam(':creator', $_SESSION['user_id'], PDO::PARAM_INT);
+    $stmt->bindParam(':admin', $id, PDO::PARAM_INT);
     $stmt->execute();
 
     // Fermer la connexion

@@ -2,6 +2,8 @@
 // Inclusion de la fonction de connexion à la base de données
 require_once 'bd.php';
 
+
+
 // Fonction pour créer un nouvel utilisateur
 function createUser($nom, $pass) {
     // Connexion à la base de données

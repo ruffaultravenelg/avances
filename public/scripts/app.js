@@ -167,11 +167,15 @@ popup_addavance_somme_validate.onclick = () => {
     formData.append('somme', somme);
 
     // Send request to server
+    console.log("f");
     fetch('add_avance.php', {
         method: 'POST',
         body: formData
-    }).then(response => response.json())
-      .then(data => {
+    }).then(response => {
+        if (response.ok)
+            return response.json()
+        return null; 
+    }).then(data => {
           if (data.success) {
             closePopup();
             fetchAvances();
