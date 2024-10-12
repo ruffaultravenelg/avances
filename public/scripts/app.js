@@ -167,14 +167,13 @@ popup_addavance_somme_validate.onclick = () => {
     formData.append('somme', somme);
 
     // Send request to server
-    console.log("f");
     fetch('add_avance.php', {
         method: 'POST',
         body: formData
     }).then(response => {
         if (response.ok)
             return response.json()
-        return null; 
+        return {success: false, message: "Internal server error"}; 
     }).then(data => {
           if (data.success) {
             closePopup();
