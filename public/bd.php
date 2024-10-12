@@ -1,6 +1,6 @@
 <?php
 // Connexion à la base de données SQLite
-function connectDb($dbPath = './db/data.db') {
+function connectDb($dbPath = '../db/data.db') {
     try {
         $db = new PDO('sqlite:' . $dbPath);
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
