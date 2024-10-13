@@ -1,34 +1,42 @@
-//////////////
-//// BACK ////
-//////////////
+import { fetchPOST } from './fetcher.js';
+
+/////////////
+/// BACK ////
+/////////////
+
 const back = document.getElementById('back');
 
-// Show back
-function showBack(){
-
-    back.style.display = 'initial'
+/**
+ * Show the back overlay with a fade-in effect.
+ */
+function showBack() {
+    back.style.display = 'initial';
     setTimeout(() => {
         back.className = 'back-showed';
     }, 1);
-
 }
 
-// Hide back
-function hideBack(){
-
+/**
+ * Hide the back overlay with a fade-out effect.
+ */
+function hideBack() {
     back.className = '';
     setTimeout(() => {
         back.style.display = 'none';
     }, 600);
-
 }
 
-///////////////
-//// POPUP ////
-///////////////
+//////////////
+/// POPUP ////
+//////////////
 const popup = document.getElementById('popup');
-function showPopup(id){
 
+/**
+ * Show a popup with the specified content by its ID.
+ * Hides other popup content before displaying the chosen one.
+ * @param {string} id - The ID of the popup content to display.
+ */
+function showPopup(id) {
     // Hide each child
     for (let i = 0; i < popup.children.length; i++) {
         const child = popup.children[i];
@@ -36,47 +44,48 @@ function showPopup(id){
     }
 
     // Show animation
-    if (popup.className == 'popup-showed'){
-        
-    } else {
+    if (popup.className !== 'popup-showed') {
         showBack();
         popup.className = 'popup-showed';
     }
 }
 
-// Close popup
-function closePopup(){
+/**
+ * Close the popup and hide the back overlay.
+ */
+function closePopup() {
     popup.className = '';
     hideBack();
 }
 
-//////////////////////
-//// LOAD CLIENTS ////
-//////////////////////
+/////////////////////
+/// LOAD CLIENTS ////
+/////////////////////
+
 const clientsSection = document.querySelector('.clients');
 
-// Fonction pour récupérer les avances et mettre à jour l'affichage
+/**
+ * Fetches the list of advances from the server and updates the client display.
+ */
 const fetchAvances = async () => {
-    try {
-        const response = await fetch('avances.php'); // Appel AJAX à avances.php
-        const result = await response.json();
+    const result = await fetchPOST('avances.php', null);
 
-        if (result.success) {
-            updateClientsList(result.avances); // Appel de la fonction pour mettre à jour l'affichage
-        } else {
-            console.error("Erreur lors de la récupération des avances :", result.message);
-        }
-    } catch (error) {
-        console.error("Erreur réseau ou de serveur :", error);
+    if (result.success) {
+        updateClientsList(result.avances);
+    } else {
+        console.error("Error fetching advances:", result.message);
     }
 };
 
-// Fonction pour mettre à jour la liste des clients
+/**
+ * Update the client list with the fetched advances.
+ * @param {Array} avances - The list of advances to display.
+ */
 const updateClientsList = (avances) => {
-    // Vider la section des clients avant de la mettre à jour
+    // Clear the client section before updating
     clientsSection.innerHTML = '';
 
-    // Parcourir chaque avance et générer le HTML correspondant
+    // Iterate over each advance and generate HTML
     avances.forEach((avance) => {
         avance.nom = capitalizeFirstLetter(avance.nom);
 
@@ -96,153 +105,151 @@ const updateClientsList = (avances) => {
 
         clientsSection.appendChild(clientDiv);
 
-        clientDiv.onclick = ()=>{
+        clientDiv.onclick = () => {
             showValidatePopup(avance.nom, avance.somme);
         };
     });
 };
 
-// Fonction pour capitaliser la première lettre
+/**
+ * Capitalizes the first letter of a string.
+ * @param {string} string - The string to capitalize.
+ * @returns {string} - The capitalized string.
+ */
 const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
 };
+
 fetchAvances();
 
-//////////////////////////
-//// ADD AVANCE: NAME ////
-//////////////////////////
+/////////////////////////
+/// ADD ADVANCE: NAME ///
+/////////////////////////
 const popup_addavance_name_value = document.getElementById('popup_addavance_name_value');
 const popup_addavance_name_cancel = document.getElementById('popup_addavance_name_cancel');
 const popup_addavance_name_continue = document.getElementById('popup_addavance_name_continue');
 const addAvanceBtn = document.getElementById('addAvanceBtn');
 
-// Open avance menu
-addAvanceBtn.addEventListener('click', ()=>{
+// Open the add advance name popup
+addAvanceBtn.addEventListener('click', () => {
     popup_addavance_name_value.value = '';
     showPopup('popup_addavance_name');
 });
 
-// Cancel
-popup_addavance_name_cancel.addEventListener('click', ()=>{
+// Cancel the popup
+popup_addavance_name_cancel.addEventListener('click', () => {
     closePopup();
 });
 
-
-///////////////////////////
-//// ADD AVANCE: SOMME ////
-///////////////////////////
+////////////////////////
+/// ADD ADVANCE: SUM ///
+////////////////////////
 const popup_addavance_somme_value = document.getElementById('popup_addavance_somme_value');
 const popup_addavance_somme_cancel = document.getElementById('popup_addavance_somme_cancel');
 const popup_addavance_somme_validate = document.getElementById('popup_addavance_somme_validate');
 
-// Continue
-popup_addavance_name_continue.addEventListener('click', ()=>{
+// Continue to the sum popup
+popup_addavance_name_continue.addEventListener('click', () => {
     popup_addavance_somme_value.value = '';
     showPopup('popup_addavance_somme');
 });
 
-// Cancel
-popup_addavance_somme_cancel.addEventListener('click', ()=>{
+// Cancel the popup
+popup_addavance_somme_cancel.addEventListener('click', () => {
     closePopup();
 });
 
-// Validate
-popup_addavance_somme_validate.onclick = () => {
-
-    // Récupérer les valeurs du formulaire
+// Validate the advance
+popup_addavance_somme_validate.onclick = async () => {
     const nom = popup_addavance_name_value.value;
     const somme = popup_addavance_somme_value.value;
 
-    // Vérifier si les champs sont remplis
+    // Check if fields are filled
     if (nom === '' || somme === '') {
-        alert("Veuillez remplir tous les champs.");
+        alert("Please fill out all fields.");
         return;
     }
 
-    // Create form
-    var formData = new FormData();
+    // Create form data
+    const formData = new FormData();
     formData.append('nom', nom);
     formData.append('somme', somme);
 
-    // Send request to server
-    fetch('add_avance.php', {
-        method: 'POST',
-        body: formData
-    }).then(response => {
-        // On vérifie que la réponse est correcte
-        if (response.ok) {
-            return response.json();
-        } else {
-            // Si la réponse n'est pas ok, on tente de récupérer le message d'erreur
-            return response.json().then(errorData => {
-                throw new Error(errorData.message || "Erreur interne du serveur");
-            });
-        }
-    }).then(data => {
-        if (data.success) {
-            closePopup();
-            fetchAvances();
-        } else {
-            alert("Erreur: " + data.message);
-        }
-    }).catch(error => {
-        // Gérer les erreurs renvoyées par le serveur
-        alert("Erreur: " + error.message);
-    });
+    const result = await fetchPOST('add_avance.php', formData);
+
+    if (result.success) {
+        closePopup();
+        fetchAvances();
+    } else {
+        alert("Error: " + result.message);
+    }
+
 };
 
-
-//////////////////
-//// VALIDATE ////
-//////////////////
+////////////////
+/// VALIDATE ///
+////////////////
 const popup_validate_title = document.getElementById('popup_validate_title');
 const popup_validate_cancel = document.getElementById('popup_validate_cancel');
 const popup_validate_validate = document.getElementById('popup_validate_validate');
 
-function showValidatePopup(nom, somme){
+/**
+ * Show the validate popup with the provided client name and amount.
+ * @param {string} nom - The client's name.
+ * @param {number} somme - The amount owed.
+ */
+function showValidatePopup(nom, somme) {
+    popup_validate_title.textContent = `${nom} owes ${somme}€`;
 
-    // Set popup title
-    popup_validate_title.textContent = `${nom} doit ${somme}€`;
-
-    // Show popup
     showPopup('popup_validate');
 
-    // Set validate button action
-    popup_validate_validate.onclick = ()=>{
-        deleteAvance(nom);
+    popup_validate_validate.onclick = async () => {
+        await deleteAvance(nom);
         closePopup();
     };
-
 }
 
-// Cancel
-popup_validate_cancel.addEventListener('click', ()=>{
+// Cancel the validate popup
+popup_validate_cancel.addEventListener('click', () => {
     closePopup();
 });
 
-///////////////////////
-//// DELETE AVANCE ////
-///////////////////////
+//////////////////////
+/// DELETE ADVANCE ///
+//////////////////////
 
-// Fonction pour supprimer une avance
+/**
+ * Sends a request to delete an advance by client name.
+ * @param {string} nom - The name of the client whose advance to delete.
+ */
 async function deleteAvance(nom) {
-    try {
-        const response = await fetch('validate.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: `nom=${encodeURIComponent(nom)}`
-        });
+    const formData = new FormData();
+    formData.append('nom', nom);
 
-        const result = await response.json();
+    const result = await fetchPOST('validate.php', formData);
 
-        if (result.success) {
-            fetchAvances();  // Recharger la liste des avances
-        } else {
-            console.error(result.message);  // Afficher un message d'erreur
-        }
-    } catch (error) {
-        console.error('Erreur lors de la suppression de l\'avance:', error);
+    if (result.success) {
+        fetchAvances(); // Reload the list of advances
+    } else {
+        console.error("Error while validating avance: " + result.message); // Display error message
     }
+}
+
+//////////////
+//// MENU ////
+//////////////
+const menu = document.getElementById('menu');
+const openMenu = document.getElementById('openMenu');
+const closeMenu = document.getElementById('closeMenu');
+
+// Open menu
+openMenu.onclick = () => {
+    setTimeout(() => {
+        menu.className = 'menu-showed';
+    }, 1);
+};
+
+// Close menu
+closeMenu.onclick = () => {
+    menu.className = '';
 };

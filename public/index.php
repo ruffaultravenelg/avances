@@ -20,14 +20,15 @@ if (!isset($_SESSION['user_id'])) {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/general.css">
+    <link rel="stylesheet" href="styles/index.css">
 </head>
 <body>
 
     <!-- BAR DU HAUT -->
     <section class="top">
         <p>Avances par personnes</p>
-        <button><img src="ressources/search.svg" alt="Rechercher un client"></button>
+        <button id="openMenu"><img src="ressources/menu.svg" alt="Ouvrir le menuy"></button>
     </section>
 
     <!-- LISTE DES CLIENTS -->
@@ -36,7 +37,7 @@ if (!isset($_SESSION['user_id'])) {
     </section>
 
     <!-- AVANCE -->
-    <button id="addAvanceBtn" class="rounded-btn add-avance"><img src="ressources/payments.svg" alt="Ajouter une avance"> Ajouter une avance</button>
+    <button id="addAvanceBtn" class="rounded-btn blue-btn add-avance"><img src="ressources/payments.svg" alt="Ajouter une avance"> Ajouter une avance</button>
 
     <!-- ASSOMBRISSEMENT -->
     <div id="back"></div>
@@ -83,6 +84,16 @@ if (!isset($_SESSION['user_id'])) {
         </div>
 
     </div>
+
+    <!-- MENU -->
+    <nav id="menu">
+        <div class="btns">
+            <button class="rounded-btn blue-btn"><img src="ressources/logout.svg" alt="Logout" onclick="window.location.href='logout.php';">Se déconnecter</button>
+            <button class="rounded-btn blue-btn"><img src="ressources/folder.svg" alt="Folder">Avances validées</button>
+            <button class="rounded-btn blue-btn"><img src="ressources/search.svg" alt="Search">Rechercher</button>
+        </div>
+        <button class="rounded-btn blue-btn" id="closeMenu"><img src="ressources/cancel.svg" alt="Search">Fermer</button>
+    </nav>
 
     <!-- SCRIPTS JS -->
     <script type="module" src="scripts/app.js"></script>

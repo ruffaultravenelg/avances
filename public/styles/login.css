@@ -1,0 +1,31 @@
+/* BODY */
+body{
+    background-color: rgb(247, 247, 247);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+/* FORM */
+.login{
+    width: 100%;
+    max-width: 330px;
+    text-align: center;
+}
+
+.login p{
+    font-size: 16px;
+    color: black;
+    margin-top: 40px;
+}
+.login h2{
+    font-size: 24px;
+    font-weight: bold;
+}
+.login input{
+    margin-top: 10px;
+}
+.login button{
+    margin-top: 40px;
+}

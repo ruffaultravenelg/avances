@@ -1,0 +1,78 @@
+/* VARIABLES */
+:root{
+    --general-padding: 10vw;
+}
+@media (min-width: 768px){
+    :root{
+        --general-padding: 5vw;
+    }
+}
+
+/* GENERAL */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: whitesmoke;
+    padding: var(--general-padding);
+    width: 100%;
+    height: 100vh;
+    font-family: "Inter", sans-serif;
+}
+
+/* BUTTONS */
+.rounded-btn{
+    outline: none;
+    border: none;
+    padding: 20px 40px;
+    border-radius: 40px;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    transition-duration: 0.2s;
+}
+.rounded-btn > img{
+    width: 30px;
+    height: 30px;
+}
+.rounded-btn:hover{
+    transform: scale(1.03);
+}
+.rounded-btn:active{
+    transform: scale(0.97);
+}
+
+.red-btn{
+    width: 50%;
+    background-color: #871010;
+}
+.green-btn{
+    width: 50%;
+    background-color: #108748;
+}
+.blue-btn{
+    width: 100%;
+    background-color: #3D61CF;
+}
+.blue-btn:hover{
+    background-color: #223f94;
+}
+
+/* INPUT */
+input{
+    outline: none;
+    background-color: #F4F4F4;
+    border: 1px solid #D5D5D5;
+    border-radius: 14px;
+    text-align: center;
+    padding: 20px;
+    font-size: 18px;
+    width: 100%;
+}

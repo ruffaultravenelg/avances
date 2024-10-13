@@ -1,22 +1,3 @@
-/* VARIABLES */
-:root{
-    --general-padding: 10vw;
-}
-
-/* GENERAL */
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-body{
-    background-color: whitesmoke;
-    padding: var(--general-padding);
-    width: 100%;
-    height: 100vh;
-    font-family: "Inter", sans-serif;
-}
-
 /* TOP */
 section.top{
     display: flex;
@@ -70,50 +51,10 @@ section.clients .client p{
 }
 
 /* ADD AVANCE */
-.rounded-btn{
-    outline: none;
-    border: none;
-    padding: 20px 60px;
-    border-radius: 40px;
-    color: white;
-    font-size: 16px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-
-    transition-duration: 0.2s;
-}
-.rounded-btn > img{
-    width: 30px;
-    height: 30px;
-}
-.rounded-btn:hover{
-    transform: scale(1.03);
-}
-.rounded-btn:active{
-    transform: scale(0.97);
-}
-
-.red-btn{
-    width: 50%;
-    background-color: #871010;
-}
-.green-btn{
-    width: 50%;
-    background-color: #108748;
-}
-
 .add-avance{
     position: fixed;
     bottom: var(--general-padding);
-
-    width: calc(100% - 2 * var(--general-padding));
-    background-color: #3D61CF;
-}
-.add-avance:hover{
-    background-color: #223f94;
+    width: calc(100% - 2 * var(--general-padding)) !important;
 }
 
 /* BACK */
@@ -171,18 +112,36 @@ section.clients .client p{
     margin-top: 15px;
 }
 #popup input{
-    outline: none;
-    background-color: #F4F4F4;
-    border: 1px solid #D5D5D5;
-    border-radius: 14px;
-    text-align: center;
-    padding: 20px;
-    font-size: 18px;
-    width: 100%;
     margin: 30px 0;
 }
 .popup-btns{
     display: flex;
     flex-direction: row;
     gap: 30px;
+}
+
+/* MENU */
+#menu{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    top: 100%;
+    left: 0;
+    transition: 600ms ease-in-out;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--general-padding);
+}
+.menu-showed{
+    top: 0 !important;
+}
+#menu .btns{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
