@@ -119,7 +119,6 @@ const addAvanceBtn = document.getElementById('addAvanceBtn');
 // Open avance menu
 addAvanceBtn.addEventListener('click', ()=>{
     popup_addavance_name_value.value = '';
-    popup_addavance_name_value.focus();
     showPopup('popup_addavance_name');
 });
 
@@ -139,7 +138,6 @@ const popup_addavance_somme_validate = document.getElementById('popup_addavance_
 // Continue
 popup_addavance_name_continue.addEventListener('click', ()=>{
     popup_addavance_somme_value.value = '';
-    popup_addavance_somme_value.focus();
     showPopup('popup_addavance_somme');
 });
 
@@ -162,7 +160,7 @@ popup_addavance_somme_validate.onclick = () => {
     }
 
     // Create form
-    var formData = new FormData(this);
+    var formData = new FormData();
     formData.append('nom', nom);
     formData.append('somme', somme);
 
@@ -171,19 +169,28 @@ popup_addavance_somme_validate.onclick = () => {
         method: 'POST',
         body: formData
     }).then(response => {
-        if (response.ok)
-            return response.json()
-        return {success: false, message: "Internal server error"}; 
+        // On vérifie que la réponse est correcte
+        if (response.ok) {
+            return response.json();
+        } else {
+            // Si la réponse n'est pas ok, on tente de récupérer le message d'erreur
+            return response.json().then(errorData => {
+                throw new Error(errorData.message || "Erreur interne du serveur");
+            });
+        }
     }).then(data => {
-          if (data.success) {
+        if (data.success) {
             closePopup();
             fetchAvances();
-          } else {
-              alert("Erreur: " + data.message);
-          }
-      });
-
+        } else {
+            alert("Erreur: " + data.message);
+        }
+    }).catch(error => {
+        // Gérer les erreurs renvoyées par le serveur
+        alert("Erreur: " + error.message);
+    });
 };
+
 
 //////////////////
 //// VALIDATE ////

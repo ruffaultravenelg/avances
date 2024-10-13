@@ -25,7 +25,7 @@ if (!isset($_POST['nom']) || !isset($_POST['somme'])) {
 
 $nom = htmlspecialchars(trim($_POST['nom']));
 $somme = floatval($_POST['somme']);
-$id = htmlspecialchars(string: $_SESSION['user_id']);
+$id = htmlspecialchars($_SESSION['user_id']);
 
 // Vérification des données
 if (empty($nom) || $somme <= 0) {
