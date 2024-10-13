@@ -3,6 +3,7 @@
 require_once 'bd.php';
 
 // Connected
+session_start();
 if (!isset($_SESSION['user_id'])) {
 	header('Location: login.php');
 	exit();
