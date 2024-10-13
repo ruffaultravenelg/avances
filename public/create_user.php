@@ -2,7 +2,11 @@
 // Inclusion de la fonction de connexion à la base de données
 require_once 'bd.php';
 
-
+// Connected
+if (!isset($_SESSION['user_id'])) {
+	header('Location: login.php');
+	exit();
+}
 
 // Fonction pour créer un nouvel utilisateur
 function createUser($nom, $pass) {
