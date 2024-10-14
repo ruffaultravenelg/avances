@@ -216,7 +216,7 @@ const popup_validate_validate = document.getElementById('popup_validate_validate
  * @param {number} somme - The amount owed.
  */
 function showValidatePopup(nom, somme) {
-    popup_validate_title.textContent = `${nom} owes ${somme}€`;
+    popup_validate_title.textContent = `${nom} doit ${somme}€`;
 
     showPopup('popup_validate');
 
