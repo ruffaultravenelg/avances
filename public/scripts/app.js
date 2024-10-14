@@ -92,15 +92,21 @@ const updateClientsList = (avances) => {
         const clientDiv = document.createElement('div');
         clientDiv.className = 'client';
 
+        const infoDiv = document.createElement('div');
+
         const clientNameP = document.createElement('p');
-        clientNameP.className = 'client-name';
         clientNameP.textContent = avance.nom;
 
+        const clientInfoP = document.createElement('p');
+        clientInfoP.textContent = `Ajouté le ${formatDate(avance.creation_date)} par ${avance.admin}`;
+
         const clientEuroP = document.createElement('p');
-        clientEuroP.className = 'client-euro';
         clientEuroP.textContent = `${parseFloat(avance.somme).toFixed(2)}€`;
 
-        clientDiv.appendChild(clientNameP);
+        infoDiv.appendChild(clientNameP);
+        infoDiv.appendChild(clientInfoP);
+
+        clientDiv.appendChild(infoDiv);
         clientDiv.appendChild(clientEuroP);
 
         clientsSection.appendChild(clientDiv);
@@ -110,6 +116,19 @@ const updateClientsList = (avances) => {
         };
     });
 };
+
+function formatDate(dateString) {
+    const date = new Date(dateString);
+
+    const day = String(date.getDate()).padStart(2, '0'); // Jour avec 2 chiffres
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Mois (getMonth est basé sur 0, donc ajouter 1)
+    const year = date.getFullYear(); // Année
+
+    const hours = String(date.getHours()).padStart(2, '0'); // Heures avec 2 chiffres
+    const minutes = String(date.getMinutes()).padStart(2, '0'); // Minutes avec 2 chiffres
+
+    return `${day}/${month}/${year} à ${hours}h${minutes}`;
+}
 
 /**
  * Capitalizes the first letter of a string.

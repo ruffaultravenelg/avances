@@ -25,6 +25,10 @@ section.clients .client p{
     font-size: 16px;
     color: black;
 }
+.client > div > p:nth-child(2){
+    font-size: 13px;
+    color: rgb(53, 53, 53);
+}
 
 /* ADD AVANCE */
 .add-avance{

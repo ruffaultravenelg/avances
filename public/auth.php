@@ -23,7 +23,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 // Vérifier si l'utilisateur existe et si le mot de passe est correct
 if ($user && password_verify($pass, $user['pass'])) {
     // L'utilisateur est authentifié
-    $_SESSION['user_id'] = $nom;  // Stocker le nom d'utilisateur dans la session
+    $_SESSION['user_id'] = $user['id'];
     header('Location: index.php');
     exit();
 } else {

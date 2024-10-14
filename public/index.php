@@ -50,7 +50,7 @@ if (!isset($_SESSION['user_id'])) {
             
             <p class="popup-title">Ajouter une avance</p>
             <p class="popup-subtitle">Nom du client</p>
-            <input type="text" placeholder="Axelle Hannier" id="popup_addavance_name_value">
+            <input type="text" placeholder="Axelle Hannier" autocomplete="off" id="popup_addavance_name_value">
             <div class="popup-btns">
                 <button class="rounded-btn red-btn" id="popup_addavance_name_cancel"><img src="ressources/cancel.svg" alt="Annuler"></button>
                 <button class="rounded-btn green-btn" id="popup_addavance_name_continue"><img src="ressources/forward.svg" alt="Continuer"></button>
@@ -63,7 +63,7 @@ if (!isset($_SESSION['user_id'])) {
             
             <p class="popup-title">Ajouter une avance</p>
             <p class="popup-subtitle">Somme avancé</p>
-            <input type="number" min="0" placeholder="1.00" id="popup_addavance_somme_value">
+            <input type="number" min="0" placeholder="1.00" autocomplete="off" id="popup_addavance_somme_value">
             <div class="popup-btns">
                 <button class="rounded-btn red-btn" id="popup_addavance_somme_cancel"><img src="ressources/cancel.svg" alt="Annuler"></button>
                 <button class="rounded-btn green-btn" id="popup_addavance_somme_validate"><img src="ressources/validate.svg" alt="Valider"></button>
