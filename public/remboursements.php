@@ -14,7 +14,7 @@ if (!isset($_SESSION['user_id'])) {
 function getRemboursements() {
     try {
         $db = connectDb();
-        $stmt = $db->prepare("SELECT nom, somme, payement_date, admin FROM REMBOURSEMENTS ORDER BY payement_date DESC;");
+        $stmt = $db->prepare("SELECT REMBOURSEMENTS.nom AS nom, somme, payement_date, USERS.nom AS admin FROM REMBOURSEMENTS INNER JOIN USERS ON REMBOURSEMENTS.admin = USERS.id ORDER BY payement_date DESC;");
         $stmt->execute();
 
         // Récupérer les résultats sous forme de tableau associatif

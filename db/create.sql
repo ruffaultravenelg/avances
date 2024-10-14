@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS AVANCES (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nom TEXT NOT NULL,
     somme REAL NOT NULL,
-    creation_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    creation_date DATETIME NOT NULL, -- No default cause it doesn't work, use `DATETIME('now', 'localtime')` in code
     admin INTEGER NOT NULL -- creator -> USERS.id
 );
 
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS REMBOURSEMENTS (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nom TEXT NOT NULL,
     somme REAL NOT NULL,
-    payement_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    payement_date DATETIME NOT NULL,
     admin INTEGER NOT NULL -- admin -> USERS.id
 );
 

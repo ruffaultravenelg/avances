@@ -38,7 +38,7 @@ try {
     $db = connectDb();
         
     // Préparation et exécution de la requête d'insertion
-    $stmt = $db->prepare("INSERT INTO AVANCES (nom, somme, admin) VALUES (:nom, :somme, :admin)");
+    $stmt = $db->prepare("INSERT INTO AVANCES (nom, somme, admin, creation_date) VALUES (:nom, :somme, :admin, DATETIME('now', 'localtime'))");
     $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
     $stmt->bindParam(':somme', $somme, PDO::PARAM_STR);
     $stmt->bindParam(':admin', $id, PDO::PARAM_INT);

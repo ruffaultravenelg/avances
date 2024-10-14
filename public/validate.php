@@ -42,7 +42,7 @@ try {
         $totalSomme = $row['total_somme'];
 
         // Insérer dans la table REMBOURSEMENTS
-        $stmt = $db->prepare('INSERT INTO REMBOURSEMENTS (nom, somme, admin) VALUES (?, ?, ?)');
+        $stmt = $db->prepare("INSERT INTO REMBOURSEMENTS (nom, somme, admin, payement_date) VALUES (?, ?, ?, DATETIME('now', 'localtime'))");
         $stmt->execute([$nom, $totalSomme, $_SESSION['user_id']]);
 
         // Supprimer les avances en fonction du nom dans la table AVANCES
