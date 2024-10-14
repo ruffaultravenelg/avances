@@ -35,6 +35,7 @@ body{
     align-items: center;
     justify-content: center;
     gap: 20px;
+    cursor: pointer;
 
     transition-duration: 0.2s;
 }
@@ -75,4 +76,65 @@ input{
     padding: 20px;
     font-size: 18px;
     width: 100%;
+}
+
+/* MENU */
+#menu{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    top: 100%;
+    left: 0;
+    transition: 400ms ease;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--general-padding);
+}
+.menu-showed{
+    top: 0 !important;
+}
+#menu .btns{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#openMenu{
+    cursor: pointer;
+    transition: 200ms;
+}
+#openMenu:hover{
+    transform: scale(1.05);
+}
+#openMenu:active{
+    transform: scale(0.95);
+}
+
+/* TOP */
+section.top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+section.top > button{
+    outline: none;
+    border: none;
+    background-color: transparent;
+    width: 30px;
+    height: 30px;
+}
+section.top > button > img{
+    width: 30px;
+    height: 30px;
+}
+section.top > p{
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
 }

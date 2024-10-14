@@ -28,7 +28,7 @@ if (!isset($_SESSION['user_id'])) {
     <!-- BAR DU HAUT -->
     <section class="top">
         <p>Avances par personnes</p>
-        <button id="openMenu"><img src="ressources/menu.svg" alt="Ouvrir le menuy"></button>
+        <button id="openMenu"><img src="ressources/menu.svg" alt="Ouvrir le menu"></button>
     </section>
 
     <!-- LISTE DES CLIENTS -->
@@ -88,14 +88,16 @@ if (!isset($_SESSION['user_id'])) {
     <!-- MENU -->
     <nav id="menu">
         <div class="btns">
-            <button class="rounded-btn blue-btn"><img src="ressources/logout.svg" alt="Logout" onclick="window.location.href='logout.php';">Se déconnecter</button>
-            <button class="rounded-btn blue-btn"><img src="ressources/folder.svg" alt="Folder">Avances validées</button>
+            <button class="rounded-btn blue-btn" onclick="window.location.href='index.php';"><img src="ressources/payments.svg" alt="Avances">Avances</button>
+            <button class="rounded-btn blue-btn" onclick="window.location.href='remboursements.php';"><img src="ressources/folder.svg" alt="Folder">Avances validées</button>
             <button class="rounded-btn blue-btn"><img src="ressources/search.svg" alt="Search">Rechercher</button>
+            <button class="rounded-btn blue-btn" onclick="window.location.href='logout.php';"><img src="ressources/logout.svg" alt="Logout">Se déconnecter</button>
         </div>
         <button class="rounded-btn blue-btn" id="closeMenu"><img src="ressources/cancel.svg" alt="Search">Fermer</button>
     </nav>
 
     <!-- SCRIPTS JS -->
+    <script type="module" src="scripts/nav.js"></script>
     <script type="module" src="scripts/app.js"></script>
 
 </body>

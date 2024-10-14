@@ -141,6 +141,15 @@ popup_addavance_name_cancel.addEventListener('click', () => {
     closePopup();
 });
 
+// Enter
+popup_addavance_name_value.addEventListener('keypress', (e)=>{
+    if (e.key === 'Enter'){
+        e.preventDefault();
+        popup_addavance_name_continue.click();
+        popup_addavance_somme_value.focus();
+    }
+});
+
 ////////////////////////
 /// ADD ADVANCE: SUM ///
 ////////////////////////
@@ -157,6 +166,14 @@ popup_addavance_name_continue.addEventListener('click', () => {
 // Cancel the popup
 popup_addavance_somme_cancel.addEventListener('click', () => {
     closePopup();
+});
+
+// Enter
+popup_addavance_somme_value.addEventListener('keypress', (e)=>{
+    if (e.key === 'Enter'){
+        e.preventDefault();
+        popup_addavance_somme_validate.click();
+    }
 });
 
 // Validate the advance
@@ -178,11 +195,11 @@ popup_addavance_somme_validate.onclick = async () => {
     const result = await fetchPOST('add_avance.php', formData);
 
     if (result.success) {
-        closePopup();
         fetchAvances();
     } else {
-        alert("Error: " + result.message);
+        console.log('Error while updating db: ' + result.message);
     }
+    closePopup();
 
 };
 
@@ -234,22 +251,3 @@ async function deleteAvance(nom) {
         console.error("Error while validating avance: " + result.message); // Display error message
     }
 }
-
-//////////////
-//// MENU ////
-//////////////
-const menu = document.getElementById('menu');
-const openMenu = document.getElementById('openMenu');
-const closeMenu = document.getElementById('closeMenu');
-
-// Open menu
-openMenu.onclick = () => {
-    setTimeout(() => {
-        menu.className = 'menu-showed';
-    }, 1);
-};
-
-// Close menu
-closeMenu.onclick = () => {
-    menu.className = '';
-};

@@ -32,7 +32,7 @@ if (isset($_SESSION['user_id'])) {
 
         <form action="auth.php" method="POST">
             <p for="nom">Nom d'utilisateur</p>
-            <input type="text" name="nom" required>
+            <input type="text" name="nom" autocorrect="off" autocapitalize="none"required>
 
             <p for="pass">Mot de passe</p>
             <input type="password" name="pass" required>
