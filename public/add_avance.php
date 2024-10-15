@@ -2,6 +2,12 @@
 session_start();
 require 'bd.php'; 
 
+// Supression des accents
+function stripAccents($str) {
+    return strtr(utf8_decode($str), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+}
+
+
 // Fonction pour renvoyer une réponse JSON avec un code HTTP
 function sendResponse($success, $message, $httpCode = 200) {
     http_response_code($httpCode);
@@ -23,8 +29,11 @@ if (!isset($_POST['nom']) || !isset($_POST['somme'])) {
     sendResponse(false, "Données manquantes. Veuillez remplir le formulaire correctement.", 400);
 }
 
-$nom = htmlspecialchars(trim($_POST['nom']));
+$nom = stripAccents($_POST['nom']);
+$nom = htmlspecialchars(trim($nom));
+
 $somme = floatval($_POST['somme']);
+
 $id = htmlspecialchars($_SESSION['user_id']);
 
 // Vérification des données
