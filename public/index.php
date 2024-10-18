@@ -25,19 +25,24 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 <body>
 
-    <!-- BAR DU HAUT -->
-    <section class="top">
-        <p>Avances par personnes</p>
-        <button id="openMenu"><img src="ressources/menu.svg" alt="Ouvrir le menu"></button>
-    </section>
+    <!-- CONTENU -->
+    <main>
 
-    <!-- LISTE DES CLIENTS -->
-    <section class="clients">
+        <!-- BAR DU HAUT -->
+        <section class="top">
+            <p>Avances par personnes</p>
+            <button id="openMenu"><img src="ressources/menu.svg" alt="Ouvrir le menu"></button>
+        </section>
 
-    </section>
+        <!-- LISTE DES CLIENTS -->
+        <section class="clients">
 
-    <!-- AVANCE -->
-    <button id="addAvanceBtn" class="rounded-btn blue-btn add-avance"><img src="ressources/payments.svg" alt="Ajouter une avance"> Ajouter une avance</button>
+        </section>
+
+        <!-- AVANCE -->
+        <button id="addAvanceBtn" class="rounded-btn blue-btn add-avance"><img src="ressources/payments.svg" alt="Ajouter une avance"> Ajouter une avance</button>
+
+    </main>
 
     <!-- ASSOMBRISSEMENT -->
     <div id="back"></div>
@@ -50,7 +55,7 @@ if (!isset($_SESSION['user_id'])) {
             
             <p class="popup-title">Ajouter une avance</p>
             <p class="popup-subtitle">Nom du client</p>
-            <input type="text" placeholder="Axelle Hannier" autocomplete="off" id="popup_addavance_name_value">
+            <input type="text" placeholder="Théo Lannier" autocomplete="off" id="popup_addavance_name_value">
             <div class="popup-btns">
                 <button class="rounded-btn red-btn" id="popup_addavance_name_cancel"><img src="ressources/cancel.svg" alt="Annuler"></button>
                 <button class="rounded-btn green-btn" id="popup_addavance_name_continue"><img src="ressources/forward.svg" alt="Continuer"></button>

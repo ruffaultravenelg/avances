@@ -4,7 +4,11 @@ require 'bd.php';
 
 // Supression des accents
 function stripAccents($str) {
-    return strtr(utf8_decode($str), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+    // Convertit les caractères avec accents en leur équivalent sans accent
+    $str = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $str);
+    // Supprime tout ce qui n'est pas un caractère alphanumérique, un espace ou un trait d'union
+    $str = preg_replace('/[^a-zA-Z0-9\s\-]/', '', $str);
+    return $str;
 }
 
 
@@ -29,8 +33,7 @@ if (!isset($_POST['nom']) || !isset($_POST['somme'])) {
     sendResponse(false, "Données manquantes. Veuillez remplir le formulaire correctement.", 400);
 }
 
-$nom = stripAccents($_POST['nom']);
-$nom = htmlspecialchars(trim($nom));
+$nom = htmlspecialchars(stripAccents(trim($_POST['nom'])));
 
 $somme = floatval($_POST['somme']);
 
